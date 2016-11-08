@@ -39,13 +39,8 @@ public class CircularLinkedList extends AbstractLinkedList implements CircularCo
             Node current = first;
 	    Node previous = last;
 	    if (first.value.equals(s)) {
-		System.out.println("first: " + first.value);
-		System.out.println("first.next: " + first.next.value);
 		first = first.next;
 		last.next = first;
-		System.out.println("first: " + first.value);
-	 	System.out.println("found it");
-		System.out.println("found it");
 		n--;
 		return;
 	    }
@@ -103,17 +98,13 @@ public class CircularLinkedList extends AbstractLinkedList implements CircularCo
 
     class CircularLinkedListIterator implements CircularIterator {
 	Node current;
-	Node end;
 	Node previous;
-	int  elementNumber;
-	int size;        
+	int  elementNumber;      
 
         public CircularLinkedListIterator(Node first, Node last, int n) {
             current = first;
 	    previous = last;
-	    end = last;
 	    elementNumber = 1;
-	    size = n;
         }
 
         public boolean hasNext() {
@@ -128,10 +119,17 @@ public class CircularLinkedList extends AbstractLinkedList implements CircularCo
 	    return previous.value;
         }
 
-        public void remove() { //remove current node and return the value (string value)
-            previous.next = current.next;
+        public void remove() { //removes current node
+	    if (current == first) {
+    	        first = first.next;
+    	        last.next = first;
+	    }    
+	    if (current == last) {
+	        last = previous;
+	    }        
+	    previous.next = current.next;
 	    current = previous.next;
-	    size--;
+	    n--;
         }
 
         public String removeKthElement(int k) {
@@ -146,7 +144,7 @@ public class CircularLinkedList extends AbstractLinkedList implements CircularCo
         }
 
         public boolean oneElementLeft() {
-            return (size == 1);
+            return (n == 1);
         }
 
     }
@@ -226,14 +224,15 @@ f.removeKthElement(3);
 int k1 = 5;
     String [] test1 = { "Fido", "Delilah", "Rugrat", "Joshua", "Sid", 
                         "Bow-wow", "Bogo", "Pogo", "Mimi", "Chloe" };
+
 CircularLinkedList linkedList = new CircularLinkedList(test1);
     for (CircularIterator i = linkedList.iterator(); !i.oneElementLeft(); ) {
       i.removeKthElement(k1);
     }
 	System.out.println(linkedList.first());
-	System.out.println(linkedList.first());
-    assert linkedList.first() == "Rugrat";
+System.out.println(linkedList.size());
 	
+    assert linkedList.first() == "Rugrat";
     }
 }
 
