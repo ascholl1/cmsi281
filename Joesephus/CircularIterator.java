@@ -9,7 +9,4 @@ public interface CircularIterator extends Iterator {
     // Only one element is left in the collection
     public boolean oneElementLeft();
 
-    //added removeString method because it wanted there to be a remove method without any arguments
-    //public void removeString(String s);
-
 }
