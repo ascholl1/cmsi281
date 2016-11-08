@@ -8,11 +8,13 @@ public abstract class AbstractLinkedList implements Collectible {
     }
     
     public AbstractLinkedList(String[] elements) {
-        for (String s : elements) {
-            if (s != null) {
+	first = null;
+	n = 0;
+        for (int i = elements.length - 1; i >= 0; i--) {
+            if (elements[i] != null) {
                 // take advantage of your own add() method
                 // to make this constructor
-                add(s);
+                add(elements[i]);
             }
         }
     }
