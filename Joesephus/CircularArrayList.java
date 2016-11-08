@@ -63,9 +63,11 @@ public class CircularArrayList extends AbstractArrayList implements CircularColl
     class CircularArrayListIterator implements CircularIterator {
 	
 	int currentIndex;
+	int count;
 
         public CircularArrayListIterator(String [] elements, int size, int indexOfLast) {
 	    currentIndex = 0;
+	    count = 1;
         }
         
         public boolean hasNext() {
@@ -79,6 +81,7 @@ public class CircularArrayList extends AbstractArrayList implements CircularColl
 	    } else {
                 currentIndex = 0;
 	    }
+	    count++;
 	    return elements[previousIndex];
         }
 
@@ -88,19 +91,16 @@ public class CircularArrayList extends AbstractArrayList implements CircularColl
 	    }
 	    size--;
 	    if (elements[currentIndex] == null) {
-	        currentIndex--;
+	        currentIndex = 0;
 	    }
         }
 
         public String removeKthElement(int k) {
-	    int count = 1;
-            while(count != k) {
+	    while(count != k) {
 	        this.next();
-		count++;
 	    }
 	    this.remove();
-	    count = 0;
-	    //currentIndex++;
+	    count = 1;
 	    return elements[currentIndex];
         }
 
@@ -111,6 +111,14 @@ public class CircularArrayList extends AbstractArrayList implements CircularColl
 
      public static void main(String[] args) {
 	CircularArrayList cal1 = new CircularArrayList();
+	int k1 = 5;
+        String [] test1 = { "Fido", "Delilah", "Rugrat", "Joshua", "Sid", 
+                        "Bow-wow", "Bogo", "Pogo", "Mimi", "Chloe" };
+        CircularArrayList arrayList = new CircularArrayList(test1);
+        for (CircularIterator i = arrayList.iterator(); !i.oneElementLeft(); ) {
+            i.removeKthElement(k1);
+        }
+        System.out.println("first element" + arrayList.elements[0]);
 	cal1.add("element1");	
 	cal1.add("element2");
 	cal1.add("element3");
@@ -121,13 +129,29 @@ public class CircularArrayList extends AbstractArrayList implements CircularColl
 	cal1.add("element8");
 	CircularIterator i = cal1.iterator();
 	i.removeKthElement(3);
-i.removeKthElement(3);
-i.removeKthElement(3);
-i.removeKthElement(3);
-i.removeKthElement(3);
-i.removeKthElement(3);
-i.removeKthElement(3);
-
+        i.removeKthElement(3);
+	i.removeKthElement(3);
+	i.removeKthElement(3);
+	i.removeKthElement(3);
+	i.removeKthElement(3);
+	i.removeKthElement(3);
+ 	System.out.println("cal1 first: " + cal1.first());
+	CircularArrayList cal2 = new CircularArrayList();
+	cal2.add("Fido");
+	cal2.add("Delilah");
+	cal2.add("Rugrat");
+	cal2.add("Joshua");
+	cal2.add("Sid");
+	cal2.add("Bowow");
+	cal2.add("Bogo");
+	cal2.add("Pogo");
+	cal2.add("Mimi");
+	cal2.add("Chloe");
+	for (CircularIterator f = cal2.iterator(); !f.oneElementLeft(); ) {
+      	    f.removeKthElement(k1);
+        }
+	System.out.println("cal2 first: " + cal2.first());
+/*
 	System.out.println(i.next());
 	System.out.println(i.next());
 	System.out.println(i.next());
@@ -136,6 +160,7 @@ i.removeKthElement(3);
 	System.out.println(i.next());
 	System.out.println(i.next());
 	System.out.println(i.next());
+*/
     }
 
 
