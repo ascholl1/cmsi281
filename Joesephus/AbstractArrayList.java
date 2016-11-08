@@ -12,7 +12,10 @@ public abstract class AbstractArrayList implements Collectible {
     }
 
     protected AbstractArrayList(String[] elements) {
-        for (String s : elements) {
+        this.elements = new String[DEFAULT_MAX_SIZE];
+	arraySize = DEFAULT_MAX_SIZE;
+	size = 0;
+	for (String s : elements) {
             if (s != null) {
                 // take advantage of your own add() method
                 // to make this constructor
@@ -37,6 +40,8 @@ public abstract class AbstractArrayList implements Collectible {
             for (int i = 0; i < size; i++) {
                 doubleElements[i] = elements[i];
             }
+		
+	    elements = doubleElements;
 
             // ...and then you can add the new element like normal
             elements[size] = s;         
