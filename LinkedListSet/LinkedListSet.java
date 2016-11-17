@@ -17,7 +17,7 @@ class LinkedListSet {
         n = 0;
     } 
 
-    public void add(String s) {
+    public void add(String s) { //runtime is constant O(n)
 	if (first == null) {
 	    first = new Node(first, s);
             n++;
@@ -40,7 +40,7 @@ class LinkedListSet {
         n++;
     }
 
-    public String remove(String s) {
+    public String remove(String s) { //runtime is constant O(n)
 	String temp = s;
 	if (first.value.equals(s)) {
 	    first = first.next;
