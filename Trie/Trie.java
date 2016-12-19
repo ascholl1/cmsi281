@@ -266,13 +266,6 @@ class Trie {
 			s.close();
 		    }
 	    }
-	    trie1.addWord("apple");
-	    trie1.addWord("apple");
-	    trie1.addWord("app");
-	    trie1.addWord("pizza");
-	    trie1.addWord("ape");
-	    trie1.addWord("zoo");
-	    trie1.addWord("pizza");
 	    TrieNode rootNode = trie1.root;
 	    TrieNode aNode = rootNode.children[0];
 	    TrieNode apNode = aNode.children[15];
@@ -285,7 +278,6 @@ class Trie {
 	    //System.out.println(trie1.words[0]);
 	    ArrayList<TrieNode> words = new ArrayList<TrieNode>();
 	   // trie1.traverseTrie(trie1.root, "");
-	    LinkedList list = new LinkedList();
 	    ArrayList<TrieNode> wordList = trie1.findMaxes(trie1.root, "", words);
 	    BubbleSort(wordList);
 	    
